@@ -7,7 +7,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch src/server/server.ts"
+    "dev": "tsx watch src/server.ts"
   },
   "dependencies": {
     "ejs": "^3.1.10",
