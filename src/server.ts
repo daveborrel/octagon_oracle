@@ -1,23 +1,9 @@
-import express from "express";
+const http = require("http");
+require("dotenv").config();
+const app = require("./app");
+const server = http.createServer(app);
+const PORT = process.env.PORT || 3000;
 
-console.log(express);
-
-const server = express();
-
-server.use(express.static("dist"));
-
-server.set("view engine", "ejs");
-
-// server.use("/", (req, res) => {
-//   res.render("index", {
-//     content: "EJS is cool.",
-//   });
-// });
-
-server.use("/", (req, res) => {
-  res.send("Hello Express");
-});
-
-server.listen(8080, "0.0.0.0", () => {
-  console.info("Express server is listening at http://0.0.0.0:8080");
+server.listen(PORT, () => {
+  console.log(`Server running on port: ${PORT}`);
 });
