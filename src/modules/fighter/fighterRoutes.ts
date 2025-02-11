@@ -4,7 +4,9 @@ import FighterController from "./fighterController";
 const fighterRoutes = express.Router();
 const fighterController = new FighterController();
 
-fighterRoutes.use("/fighters", fighterController.createFighter);
-fighterRoutes.use("/fighters", fighterController.getFighters);
+// Make sure to use post and get instead of use
+// Use is for Middleware only
+fighterRoutes.post("/fighters", fighterController.createFighter);
+fighterRoutes.get("/fighters", fighterController.getFighters);
 
 export default fighterRoutes;
