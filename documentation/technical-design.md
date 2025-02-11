@@ -7,3 +7,11 @@
 - ejs
 - express
 - typescript
+
+### Development
+
+- MongoDB + Docker
+
+### Deployment
+
+- AWS ECS2?
