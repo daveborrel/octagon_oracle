@@ -1,6 +1,5 @@
 import * as mongoDB from "mongodb";
 import * as dotenv from "dotenv";
-const { MongoClient } = require("mongodb");
 
 export const collections: { users?: mongoDB.Collection } = {};
 

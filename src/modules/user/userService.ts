@@ -17,8 +17,11 @@ export default class UserService {
   //   return newUser;
   // }
 
-  async getUser(id: string) {
-    // Add any business logic here
-    return await this.repository.getUser(id);
+  async getUser() {
+    try {
+      return await this.repository.getUser();
+    } catch (error) {
+      throw error;
+    }
   }
 }

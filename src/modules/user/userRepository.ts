@@ -1,9 +1,17 @@
 // userRepository.ts
 import { collections } from "./database";
-import User from "./userModel";
 
 export default class UserRepository {
-  async getUser(id: string): Promise<User | null> {
-    return await collections.users?.findOne({ _id: id });
+  async getUser(): Promise<any> {
+    try {
+      const user = await collections.users?.findOne({
+        name: "Deluxe Loft Suite",
+      });
+      console.log(user._id);
+      return user;
+    } catch (error) {
+      console.error("Could not retrieve user", error);
+      throw error;
+    }
   }
 }
