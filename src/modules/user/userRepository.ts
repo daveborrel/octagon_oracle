@@ -1,7 +1,18 @@
 // userRepository.ts
-import { collections } from "./database";
+import { collections } from "../../config/database/database";
+import User from "./userModel";
 
 export default class UserRepository {
+  async createUser(firstName: string, lastName: string): Promise<any> {
+    const newUser = new User(firstName, lastName);
+    try {
+      await collections.users?.insertOne(newUser);
+      return newUser;
+    } catch (error) {
+      console.error("Unable to add user", error);
+    }
+  }
+
   async getUser(): Promise<any> {
     try {
       const user = await collections.users?.findOne({

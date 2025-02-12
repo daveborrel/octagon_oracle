@@ -11,23 +11,24 @@ export default class userController {
     this.userService = new UserService();
   }
 
-  // createUser = (req: Request, res: Response): void => {
-  //   try {
-  //     const { firstName, lastName } = req.body;
+  createUser = async (req: Request, res: Response): Promise<void> => {
+    try {
+      if (req.method === "POST") {
+        const { firstName, lastName } = req.body;
 
-  //     if (!firstName || !lastName) {
-  //       res
-  //         .status(400)
-  //         .json({ message: "First name and last name are required." });
-  //       return;
-  //     }
-
-  //     const newUser = this.userService.createUser(firstName, lastName);
-  //     res.status(201).json(newUser);
-  //   } catch (error) {
-  //     res.status(500).json({ message: "Internal Server Error", error });
-  //   }
-  // };
+        if (!firstName || !lastName) {
+          res
+            .status(400)
+            .json({ message: "First name and last name are required." });
+          return;
+        }
+        const newUser = this.userService.createUser(firstName, lastName);
+        res.status(201).json(newUser);
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Could not create user", error });
+    }
+  };
 
   getUser = async (req: Request, res: Response): Promise<void> => {
     try {

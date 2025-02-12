@@ -11,11 +11,13 @@ export default class UserService {
     this.repository = new UserRepository(); // Initialize an UserRepository Index to access the data.
   }
 
-  // createUser(firstName: string, lastName: string): User {
-  //   const newUser = new User(firstName, lastName);
-  //   this.users.push(newUser);
-  //   return newUser;
-  // }
+  async createUser(firstName: string, lastName: string): Promise<any> {
+    try {
+      return await this.repository.createUser(firstName, lastName);
+    } catch (error) {
+      throw error;
+    }
+  }
 
   async getUser() {
     try {

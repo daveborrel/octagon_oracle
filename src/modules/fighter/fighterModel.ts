@@ -1,4 +1,7 @@
+import { ObjectId } from "mongodb";
+
 export default class Fighter {
+  id?: ObjectId;
   firstName: string;
   lastName: string;
   promotion: string | null;

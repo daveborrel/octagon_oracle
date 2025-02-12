@@ -8,5 +8,10 @@ First Install Node [here](https://nodejs.org/en/download)
 
 # Documentation
 
-[Data Design and Architecture](./documentation/technical-design.md)
-[Technological Specs](./documentation/technical-design.md)
+- [Data Design and Architecture](./documentation/technical-design.md)
+- [Technological Specs](./documentation/technical-design.md)
+
+# Architecture
+
+- Backend Node (Host it where?)
+- DB : MongoDB Atlas Cluster

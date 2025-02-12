@@ -1,6 +1,6 @@
 const http = require("http");
 require("dotenv").config();
-import { connectToDatabase } from "./modules/user/database";
+import { connectToDatabase } from "./config/database/database";
 
 // There is no instance of express in this server file because we instantiate it in the other file.
 const app = require("./app");
