@@ -8,5 +8,6 @@ const userController = new UserController();
 // Use is for Middleware only
 userRoutes.post("/users", userController.createUser);
 userRoutes.get("/users", userController.getUsers);
+userRoutes.delete("/users", userController.deleteUsers);
 
 export default userRoutes;

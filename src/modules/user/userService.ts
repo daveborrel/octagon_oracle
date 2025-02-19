@@ -19,12 +19,26 @@ export default class UserService {
     }
   }
 
-  async getUsers(query) {
+  async getUsers() {
+    try {
+      return await this.repository.getUsers();
+    } catch (error) {
+      throw error;
+    }
+  }
+  async getUser(query) {
+    try {
+      return await this.repository.getUser(query);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async deleteUsers(query) {
     try {
       if (query) {
-        return await this.repository.getUser(query);
+        return await this.repository.deleteUser(query);
       }
-      return await this.repository.getUsers();
     } catch (error) {
       throw error;
     }

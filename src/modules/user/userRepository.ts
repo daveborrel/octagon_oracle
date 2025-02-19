@@ -20,7 +20,7 @@ export default class UserRepository {
   async getUsers(): Promise<any> {
     try {
       const user = await collections.users?.find({}, { limit: 10 }).toArray();
-      console.log(user);
+      console.log("Retrieved 10 Users");
       return user;
     } catch (error) {
       console.error("Could not retrieve user", error);
@@ -39,6 +39,17 @@ export default class UserRepository {
       return user;
     } catch (error) {
       console.error("Could not retrieve user", error);
+      throw error;
+    }
+  }
+
+  async deleteUser(query): Promise<any> {
+    try {
+      const user = await collections.users?.deleteOne(query);
+      console.log(user);
+      return user;
+    } catch (error) {
+      console.error("Could not delete user", error);
       throw error;
     }
   }
