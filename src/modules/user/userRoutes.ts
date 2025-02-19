@@ -6,7 +6,7 @@ const userController = new UserController();
 
 // Make sure to use post and get instead of use
 // Use is for Middleware only
-// userRoutes.post("/users", userController.createUser);
-userRoutes.get("/users", userController.getUser);
+userRoutes.post("/users", userController.createUser);
+userRoutes.get("/users", userController.getUsers);
 
 export default userRoutes;

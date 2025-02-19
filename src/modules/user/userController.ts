@@ -22,7 +22,7 @@ export default class userController {
             .json({ message: "First name and last name are required." });
           return;
         }
-        const newUser = this.userService.createUser(firstName, lastName);
+        const newUser = await this.userService.createUser(firstName, lastName);
         res.status(201).json(newUser);
       }
     } catch (error) {
@@ -30,10 +30,10 @@ export default class userController {
     }
   };
 
-  getUser = async (req: Request, res: Response): Promise<void> => {
+  getUsers = async (req: Request, res: Response): Promise<void> => {
     try {
       if (req.method === "GET") {
-        const users = await this.userService.getUser();
+        const users = await this.userService.getUsers(req.query);
         res.status(200).json(users);
       }
     } catch (error) {

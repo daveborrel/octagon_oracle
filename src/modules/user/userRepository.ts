@@ -13,12 +13,29 @@ export default class UserRepository {
     }
   }
 
-  async getUser(): Promise<any> {
+  /**
+   * Returns the users with a limit of 10 per request
+   * @returns
+   */
+  async getUsers(): Promise<any> {
     try {
-      const user = await collections.users?.findOne({
-        name: "Deluxe Loft Suite",
-      });
-      console.log(user._id);
+      const user = await collections.users?.find({}, { limit: 10 }).toArray();
+      console.log(user);
+      return user;
+    } catch (error) {
+      console.error("Could not retrieve user", error);
+      throw error;
+    }
+  }
+
+  /**
+   * Returns a specific user based on the query
+   * @returns
+   */
+  async getUser(query): Promise<any> {
+    try {
+      const user = await collections.users?.findOne(query);
+      console.log(user);
       return user;
     } catch (error) {
       console.error("Could not retrieve user", error);

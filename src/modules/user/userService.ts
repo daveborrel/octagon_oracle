@@ -19,9 +19,12 @@ export default class UserService {
     }
   }
 
-  async getUser() {
+  async getUsers(query) {
     try {
-      return await this.repository.getUser();
+      if (query) {
+        return await this.repository.getUser(query);
+      }
+      return await this.repository.getUsers();
     } catch (error) {
       throw error;
     }
