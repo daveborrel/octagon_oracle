@@ -17,31 +17,43 @@ However, in order to prepare for working with larger and more complex applicatio
 
 In each module you will have the entire MVC pattern self contained in the directory itself.
 
-Model
+## Module Structure
+
+### Model
 
 - Defines a javaScript class that describes an object.
 
-Repository
+## Repository
 
 - Abstracts data access from the service layer and makes the code more organized.
 - Each endpoint will have the [Collections](https://mongodb.github.io/node-mongodb-native/api-generated/collection.html) class use a method to interact with the database.
 
-Service
+### Service
 
 - Handles the business logic.
 
-Controller
+### Controller
 
 - Handles incoming requests and controls the workers.
 
-Routes
+### Routes
 
 - Describes how the application endpoints respond to the clients requests.
 
-### Development
+## API
+
+POST `/api/users/`
+GET `/api/users/`
+DELETE `/api/users/`
+
+POST `/api/fighters/`
+GET `/api/fighters/`
+DELETE `/api/fighters/`
+
+## Development
 
 - MongoDB + Docker
 
-### Deployment
+## Deployment
 
 - AWS ECS2?

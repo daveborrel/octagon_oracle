@@ -1,4 +1,5 @@
 import UserRepository from "./userRepository";
+import { UserNameExistsError } from "./userErrors";
 
 /**
  * Handles the business logic of creating users
@@ -11,9 +12,13 @@ export default class UserService {
     this.repository = new UserRepository(); // Initialize an UserRepository Index to access the data.
   }
 
-  async createUser(firstName: string, lastName: string): Promise<any> {
+  async createUser(username: string, password: string): Promise<any> {
     try {
-      return await this.repository.createUser(firstName, lastName);
+      const user = await this.repository.findUserByUsername(username);
+      if (user) {
+        throw new UserNameExistsError("Username already exists");
+      }
+      return await this.repository.createUser(username, password);
     } catch (error) {
       throw error;
     }

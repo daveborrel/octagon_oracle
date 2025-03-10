@@ -13,6 +13,8 @@ classDiagram
         +ObjectId id
         +String firstName
         +String lastName
+        +String username
+        +String password
         +Fighter[] favouriteFighters
     }
     class Fighter{

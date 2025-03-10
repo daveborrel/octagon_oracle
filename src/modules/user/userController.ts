@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import UserService from "./userService";
+import { UserNameExistsError } from "./userErrors";
 
 /**
  * Handles the incoming requests and assigns workers
@@ -14,19 +15,24 @@ export default class userController {
   createUser = async (req: Request, res: Response): Promise<void> => {
     try {
       if (req.method === "POST") {
-        const { firstName, lastName } = req.body;
+        const { username, password } = req.body;
 
-        if (!firstName || !lastName) {
-          res
-            .status(400)
-            .json({ message: "First name and last name are required." });
+        if (!username || !password) {
+          res.status(400).json({
+            message:
+              "Cannot create user. A username and password are required.",
+          });
           return;
         }
-        const newUser = await this.userService.createUser(firstName, lastName);
+        const newUser = await this.userService.createUser(username, password);
         res.status(201).json(newUser);
       }
     } catch (error) {
-      res.status(500).json({ message: "Could not create user", error });
+      if (error instanceof UserNameExistsError) {
+        res.status(409).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: error.message });
+      }
     }
   };
 

@@ -2,9 +2,13 @@
 import { collections } from "../../config/database/database";
 import User from "./userModel";
 
+/**
+ * Handles calling the MongoDB database
+ */
+
 export default class UserRepository {
-  async createUser(firstName: string, lastName: string): Promise<any> {
-    const newUser = new User(firstName, lastName);
+  async createUser(username: string, password: string): Promise<any> {
+    const newUser = new User(username, password);
     try {
       await collections.users?.insertOne(newUser);
       return newUser;
@@ -39,6 +43,16 @@ export default class UserRepository {
       return user;
     } catch (error) {
       console.error("Could not retrieve user", error);
+      throw error;
+    }
+  }
+
+  async findUserByUsername(username): Promise<any> {
+    try {
+      const user = await collections.users?.findOne({ username: username });
+      return user;
+    } catch (error) {
+      console.error("User does not exist", error);
       throw error;
     }
   }
