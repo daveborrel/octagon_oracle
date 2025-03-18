@@ -29,7 +29,7 @@ export default class FighterController {
   getFighters = (req: Request, res: Response): void => {
     try {
       if (req.method == "GET") {
-        const fighters = this.fighterService.getFighters();
+        const fighters = this.fighterService.getAllFighters();
         res.status(200).json(fighters);
       }
     } catch (error) {

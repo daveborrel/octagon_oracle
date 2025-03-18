@@ -21,13 +21,13 @@ export default class UserRepository {
    * Returns the users with a limit of 10 per request
    * @returns
    */
-  async getUsers(): Promise<any> {
+  async getListOfUsers(): Promise<any> {
     try {
       const user = await collections.users?.find({}, { limit: 10 }).toArray();
       console.log("Retrieved 10 Users");
       return user;
     } catch (error) {
-      console.error("Could not retrieve user", error);
+      console.error("Could not retrieve list of users", error);
       throw error;
     }
   }

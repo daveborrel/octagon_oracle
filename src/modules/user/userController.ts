@@ -39,10 +39,10 @@ export default class userController {
   getUsers = async (req: Request, res: Response): Promise<void> => {
     try {
       if (req.method === "GET" && req.query.length) {
-        const singleUser = await this.userService.getUser(req.query);
+        const singleUser = await this.userService.getUserByQuery(req.query);
         res.status(200).json(singleUser);
       } else {
-        const users = await this.userService.getUsers();
+        const users = await this.userService.getListOfUser();
         res.status(200).json(users);
       }
     } catch (error) {

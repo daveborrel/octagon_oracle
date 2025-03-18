@@ -1,19 +1,56 @@
-import Fighter from "./fighterModel";
+import { FighterExistsError } from "./fighterErrors";
+import FighterRepository from "./fighterRepository";
+
+/**
+ * Errors will only be re-thrown from the repository layer.
+ * TODO // Need to see what the best way error handling is done in this layer of the application.
+ */
 
 export default class FighterService {
-  private fighters: Fighter[];
+  private repository: FighterRepository;
 
   constructor() {
-    this.fighters = [];
+    this.repository = new FighterRepository();
   }
 
-  createFighter(firstName: string, lastName: string): Fighter {
-    const newFighter = new Fighter(firstName, lastName);
-    this.fighters.push(newFighter);
-    return newFighter;
+  async createFighter(firstName: string, lastName: string): Promise<any> {
+    try {
+      const fighter = await this.repository.getFighterByName(
+        firstName,
+        lastName
+      );
+      if (fighter) {
+        throw new FighterExistsError("Fighter already exists");
+      }
+      return await this.repository.createFighter(firstName, lastName);
+    } catch (error) {
+      throw error;
+    }
   }
 
-  getFighters(): Fighter[] {
-    return this.fighters;
+  async getAllFighters(): Promise<any> {
+    try {
+      return await this.repository.getAllFighters();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getFighterByQuery(query): Promise<any> {
+    try {
+      return await this.repository.deleteFighterByQuery(query);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async deleteFighterByQuery(query): Promise<any> {
+    try {
+      if (query) {
+        return await this.repository.deleteFighterByQuery(query);
+      }
+    } catch (error) {
+      throw error;
+    }
   }
 }

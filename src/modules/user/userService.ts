@@ -24,14 +24,14 @@ export default class UserService {
     }
   }
 
-  async getUsers() {
+  async getListOfUser() {
     try {
-      return await this.repository.getUsers();
+      return await this.repository.getListOfUsers();
     } catch (error) {
       throw error;
     }
   }
-  async getUser(query) {
+  async getUserByQuery(query) {
     try {
       return await this.repository.getUser(query);
     } catch (error) {
