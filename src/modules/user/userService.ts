@@ -48,4 +48,12 @@ export default class UserService {
       throw error;
     }
   }
+
+  async addFighterToUser(userID, fighterID) {
+    try {
+      return await this.repository.addFighterToUser(userID, fighterID);
+    } catch (error) {
+      throw error;
+    }
+  }
 }

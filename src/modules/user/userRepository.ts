@@ -1,4 +1,5 @@
 // userRepository.ts
+import { ObjectId } from "mongodb";
 import { collections } from "../../config/database/database";
 import User from "./userModel";
 
@@ -64,6 +65,24 @@ export default class UserRepository {
       return user;
     } catch (error) {
       console.error("Could not delete user", error);
+      throw error;
+    }
+  }
+
+  async addFighterToUser(userID: ObjectId, fighterID: ObjectId): Promise<any> {
+    try {
+      const user = await collections.users?.updateOne(
+        { _id: userID },
+        {
+          $push: {
+            favouriteFighters: fighterID,
+          },
+        }
+      );
+      console.log(user);
+      return user;
+    } catch (error) {
+      console.error("Could not add fighter to the user", error);
       throw error;
     }
   }

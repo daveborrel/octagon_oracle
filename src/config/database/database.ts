@@ -1,9 +1,11 @@
 import * as mongoDB from "mongodb";
 import * as dotenv from "dotenv";
+import User from "../../modules/user/userModel";
+import Fighter from "../../modules/fighter/fighterModel";
 
 export const collections: {
-  users?: mongoDB.Collection;
-  fighters?: mongoDB.Collection;
+  users?: mongoDB.Collection<User>;
+  fighters?: mongoDB.Collection<Fighter>;
 } = {};
 
 export async function connectToDatabase() {
@@ -12,8 +14,8 @@ export async function connectToDatabase() {
 
   if (
     !process.env.DB_CONN_STRING ||
-    !process.env.USER_COLLECTION_NAME ||
-    !process.env.FIGHTER_COLLECTION_NAME
+    !process.env.USERS_COLLECTION_NAME ||
+    !process.env.FIGHTERS_COLLECTION_NAME
   ) {
     throw new Error("Missing required environment variables");
   }
@@ -26,11 +28,11 @@ export async function connectToDatabase() {
 
   const db: mongoDB.Db = client.db(process.env.DB_NAME);
 
-  const usersCollection: mongoDB.Collection = db.collection(
+  const usersCollection: mongoDB.Collection<User> = db.collection(
     process.env.USERS_COLLECTION_NAME
   );
 
-  const fightersCollection: mongoDB.Collection = db.collection(
+  const fightersCollection: mongoDB.Collection<Fighter> = db.collection(
     process.env.FIGHTERS_COLLECTION_NAME
   );
 

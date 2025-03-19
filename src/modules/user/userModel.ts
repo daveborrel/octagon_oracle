@@ -12,7 +12,7 @@ export default class User {
   firstName?: string;
   lastName?: string;
   email?: string;
-  favouriteFighters: Fighter[];
+  favouriteFighters: ObjectId[];
 
   // Creates a user with a username and password
   constructor(username, password) {

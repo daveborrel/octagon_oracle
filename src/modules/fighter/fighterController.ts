@@ -1,3 +1,4 @@
+import { FighterExistsError } from "./fighterErrors";
 import FighterService from "./fighterService";
 import { Request, Response } from "express";
 
@@ -8,32 +9,58 @@ export default class FighterController {
     this.fighterService = new FighterService();
   }
 
-  createFighter = (req: Request, res: Response): void => {
+  createFighter = async (req: Request, res: Response): Promise<any> => {
     try {
-      const { firstName, lastName } = req.body;
+      if (req.method == "POST") {
+        const { firstName, lastName } = req.body;
 
-      if (!firstName || !lastName) {
-        res.status(400).json({ message: "First and last name required." });
-        return;
+        if (!firstName || !lastName) {
+          res.status(400).json({
+            message: "Cannot create fighter. First and last name required.",
+          });
+          return;
+        }
+
+        const newFighter = await this.fighterService.createFighter(
+          firstName,
+          lastName
+        );
+
+        res.status(201).json(newFighter);
       }
-
-      const newFighter = this.fighterService.createFighter(firstName, lastName);
-
-      res.status(201).json(newFighter);
     } catch (error) {
-      console.log(error);
-      res.status(500).json({ message: "Could not create fighter.", error });
+      if (error instanceof FighterExistsError) {
+        res.status(409).json({ error: error.message });
+      } else {
+        res.status(500).json({ message: "Could not create fighter.", error });
+      }
     }
   };
 
-  getFighters = (req: Request, res: Response): void => {
+  getListOfFighters = async (req: Request, res: Response): Promise<any> => {
     try {
-      if (req.method == "GET") {
-        const fighters = this.fighterService.getAllFighters();
+      if (req.method == "GET" && req.query.length) {
+        const fighters = await this.fighterService.getFighterByQuery(req.query);
         res.status(200).json(fighters);
+      } else {
+        const allFighters = await this.fighterService.getAllFighters();
+        res.status(200).json(allFighters);
       }
     } catch (error) {
       res.status(500).json({ message: "Could not retrieve fighters.", error });
+    }
+  };
+
+  deleteFighters = async (req: Request, res: Response): Promise<any> => {
+    try {
+      if (req.method == "DELETE") {
+        const fighters = await this.fighterService.deleteFighterByQuery(
+          req.query
+        );
+        res.status(200).json(fighters);
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Could not delete fighters.", error });
     }
   };
 }

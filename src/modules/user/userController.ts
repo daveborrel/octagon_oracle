@@ -60,4 +60,10 @@ export default class userController {
       res.status(500).json({ message: "Could not delete users", error });
     }
   };
+
+  addFighterToUser = async (req: Request, res: Response): Promise<void> => {
+    // check if PUT
+    // ensure that both IDs exist
+    // Do I need to throw this error here sooner?
+  };
 }
