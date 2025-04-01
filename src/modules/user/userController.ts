@@ -62,8 +62,18 @@ export default class userController {
   };
 
   addFighterToUser = async (req: Request, res: Response): Promise<void> => {
-    // check if PUT
-    // ensure that both IDs exist
-    // Do I need to throw this error here sooner?
+    try {
+      if (req.method === "PATCH") {
+        const { userID, fighterID } = req.body;
+
+        const singleUser = await this.userService.addFighterToUser(
+          userID,
+          fighterID
+        );
+        res.status(200).json(singleUser);
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Could not add fighter to user", error });
+    }
   };
 }

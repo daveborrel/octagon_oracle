@@ -71,11 +71,12 @@ export default class UserRepository {
 
   async addFighterToUser(userID: ObjectId, fighterID: ObjectId): Promise<any> {
     try {
+      console.log(userID);
       const user = await collections.users?.updateOne(
-        { _id: userID },
+        { _id: new ObjectId(userID) },
         {
           $push: {
-            favouriteFighters: fighterID,
+            favouriteFighters: new ObjectId(fighterID),
           },
         }
       );

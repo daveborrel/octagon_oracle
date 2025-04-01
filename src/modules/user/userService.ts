@@ -1,5 +1,6 @@
 import UserRepository from "./userRepository";
 import { UserNameExistsError } from "./userErrors";
+import { ObjectId } from "mongodb";
 
 /**
  * Handles the business logic of creating users
@@ -49,7 +50,7 @@ export default class UserService {
     }
   }
 
-  async addFighterToUser(userID, fighterID) {
+  async addFighterToUser(userID: ObjectId, fighterID: ObjectId) {
     try {
       return await this.repository.addFighterToUser(userID, fighterID);
     } catch (error) {

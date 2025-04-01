@@ -9,5 +9,6 @@ const userController = new UserController();
 userRoutes.post("/users", userController.createUser);
 userRoutes.get("/users", userController.getUsers);
 userRoutes.delete("/users", userController.deleteUsers);
+userRoutes.patch("/users", userController.addFighterToUser);
 
 export default userRoutes;
