@@ -7,6 +7,7 @@
 - ejs
 - express
 - typescript
+- [bcrypt](https://www.npmjs.com/package/bcrypt)
 
 ## Module Based Folder Structure
 
@@ -45,6 +46,7 @@ In each module you will have the entire MVC pattern self contained in the direct
 POST `/api/users/`
 GET `/api/users/`
 DELETE `/api/users/`
+PATCH `/api/users/`
 
 POST `/api/fighters/`
 GET `/api/fighters/`

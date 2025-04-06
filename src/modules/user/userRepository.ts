@@ -3,13 +3,17 @@ import { ObjectId } from "mongodb";
 import { collections } from "../../config/database/database";
 import User from "./userModel";
 
+const bcrypt = require("bcrypt");
+const SALT_ROUNDS = 10;
+
 /**
  * Handles calling the MongoDB database
  */
 
 export default class UserRepository {
   async createUser(username: string, password: string): Promise<any> {
-    const newUser = new User(username, password);
+    const hashedPassword = this.hashPassword(password);
+    const newUser = new User(username, hashedPassword);
     try {
       await collections.users?.insertOne(newUser);
       return newUser;
@@ -86,5 +90,10 @@ export default class UserRepository {
       console.error("Could not add fighter to the user", error);
       throw error;
     }
+  }
+
+  private hashPassword(password: string): string {
+    const hashedValue = bcrypt.hashSync(password, SALT_ROUNDS);
+    return hashedValue;
   }
 }
