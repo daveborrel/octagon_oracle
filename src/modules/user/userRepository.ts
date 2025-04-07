@@ -2,9 +2,12 @@
 import { ObjectId } from "mongodb";
 import { collections } from "../../config/database/database";
 import User from "./userModel";
+import * as dotenv from "dotenv";
 
 const bcrypt = require("bcrypt");
 const SALT_ROUNDS = 10;
+
+const jwt = require("jsonwebtoken");
 
 /**
  * Handles calling the MongoDB database
@@ -92,8 +95,23 @@ export default class UserRepository {
     }
   }
 
+  async login(username: string, password: string): Promise<any> {
+    dotenv.config();
+    const user = await collections.users?.findOne({ username: username });
+
+    if (bcrypt.compareSync(password, user.password)) {
+      // Sign the JWT, and create the token
+      jwt.sign(user, process.env.MY_SECRET);
+    } else {
+      // False case
+    }
+
+    // Redirect
+  }
+
   private hashPassword(password: string): string {
-    const hashedValue = bcrypt.hashSync(password, SALT_ROUNDS);
+    const salt = bcrypt.salt(SALT_ROUNDS);
+    const hashedValue = bcrypt.hashSync(password, salt);
     return hashedValue;
   }
 }
