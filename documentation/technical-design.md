@@ -8,6 +8,8 @@
 - express
 - typescript
 - [bcrypt](https://www.npmjs.com/package/bcrypt)
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+- [artillery]()
 
 ## Module Based Folder Structure
 
@@ -43,14 +45,14 @@ In each module you will have the entire MVC pattern self contained in the direct
 
 ## API
 
-POST `/api/users/`
-GET `/api/users/`
-DELETE `/api/users/`
-PATCH `/api/users/`
+- POST `/api/users/`
+- GET `/api/users/`
+- DELETE `/api/users/`
+- PATCH `/api/users/`
 
-POST `/api/fighters/`
-GET `/api/fighters/`
-DELETE `/api/fighters/`
+- POST `/api/fighters/`
+- GET `/api/fighters/`
+- DELETE `/api/fighters/`
 
 ## Development
 

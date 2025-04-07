@@ -4,7 +4,17 @@ Octagon Oracle is meant to be an aid for UFC sportsbetting which allows users to
 
 ## Screenshots
 
+### Postman
+
 ![Image](/demo.png)
+
+### Artillery Performance Testing
+
+![Artillery Test](/artillery.png)
+
+- Mean Response Time - 109.6ms
+- Median Response Time - 90.9ms
+- p95 - 202.4
 
 ## Getting Started
 

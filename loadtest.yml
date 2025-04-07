@@ -1,0 +1,20 @@
+config:
+  target: "http://localhost:3000" # Update with your API's URL
+  phases:
+    - duration: 60
+      arrivalRate: 10
+      rampTo: 50
+      name: "Warming up"
+    - duration: 120
+      arrivalRate: 50
+      name: "Sustained load"
+  defaults:
+    headers:
+      Content-Type: "application/json"
+      Accept: "application/json"
+
+scenarios:
+  - name: "API endpoints test"
+    flow:
+      - get:
+          url: "/api/users"
