@@ -61,6 +61,25 @@ export default class userController {
     }
   };
 
+  login = async (req: Request, res: Response): Promise<void> => {
+    try {
+      if (req.method === "POST") {
+        const { username, password } = req.body;
+
+        if (!username || !password) {
+          res.status(400).json({
+            message: "Cannot Login. Requires username and password.",
+          });
+          return;
+        }
+        const userToken = await this.userService.login(username, password);
+        res.status(201).json(userToken);
+      }
+    } catch (error) {
+      res.status(401).json({ message: "Invalid Credentials", error });
+    }
+  };
+
   addFighterToUser = async (req: Request, res: Response): Promise<void> => {
     try {
       if (req.method === "PATCH") {

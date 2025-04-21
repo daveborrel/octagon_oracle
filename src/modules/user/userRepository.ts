@@ -6,6 +6,7 @@ import * as dotenv from "dotenv";
 
 const bcrypt = require("bcrypt");
 const SALT_ROUNDS = 10;
+const EXPIRY_TIME = 3600;
 
 const jwt = require("jsonwebtoken");
 
@@ -99,14 +100,15 @@ export default class UserRepository {
     dotenv.config();
     const user = await collections.users?.findOne({ username: username });
 
-    if (bcrypt.compareSync(password, user.password)) {
-      // Sign the JWT, and create the token
-      jwt.sign(user, process.env.MY_SECRET);
-    } else {
-      // False case
+    if (!user) {
+      return null;
     }
 
-    // Redirect
+    if (bcrypt.compareSync(password, user.password)) {
+      return jwt.sign(user, process.env.MY_SECRET, { expiresIn: EXPIRY_TIME });
+    } else {
+      return null;
+    }
   }
 
   private hashPassword(password: string): string {

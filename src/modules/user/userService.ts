@@ -50,6 +50,15 @@ export default class UserService {
     }
   }
 
+  async login(username: string, password: string): Promise<any> {
+    try {
+      const token = await this.repository.login(username, password);
+      return token;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async addFighterToUser(userID: ObjectId, fighterID: ObjectId) {
     try {
       return await this.repository.addFighterToUser(userID, fighterID);

@@ -12,6 +12,6 @@ userRoutes.delete("/users", userController.deleteUsers);
 userRoutes.patch("/users", userController.addFighterToUser);
 
 // Login
-// userRoutes.post("/login", userController.)
+userRoutes.post("/login", userController.login);
 
 export default userRoutes;
