@@ -4,6 +4,8 @@ import { collections } from "../../config/database/database";
 import User from "./userModel";
 import * as dotenv from "dotenv";
 
+import { UserDoesNotExistError, InvalidCredentialsError } from "./userErrors";
+
 const bcrypt = require("bcrypt");
 const SALT_ROUNDS = 10;
 const EXPIRY_TIME = 3600;
@@ -101,13 +103,13 @@ export default class UserRepository {
     const user = await collections.users?.findOne({ username: username });
 
     if (!user) {
-      return null;
+      throw new UserDoesNotExistError("Username does not exist.");
     }
 
     if (bcrypt.compareSync(password, user.password)) {
       return jwt.sign(user, process.env.MY_SECRET, { expiresIn: EXPIRY_TIME });
     } else {
-      return null;
+      throw new InvalidCredentialsError("Invalid credentials.");
     }
   }
 

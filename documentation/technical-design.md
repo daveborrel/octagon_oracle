@@ -54,6 +54,14 @@ In each module you will have the entire MVC pattern self contained in the direct
 - GET `/api/fighters/`
 - DELETE `/api/fighters/`
 
+## Middleware
+
+Needed to write my own middleware to check for the presence of a JWT
+
+### Source
+
+- [Writing Middleware](https://expressjs.com/en/guide/writing-middleware.html)
+
 ## Development
 
 - MongoDB + Docker
