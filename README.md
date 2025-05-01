@@ -24,13 +24,14 @@ Running it in dev
 
 `npm run dev` - Runs the server
 
-Testing
+### Testing Endpoints
 
-You can use Postman to test each endpoint
+You can use Postman to test each endpoint to avoid CORS
 
-Debugging
+### Debugging
 
-In order to debug, you can create a [javascript debug terminal](https://code.visualstudio.com/docs/nodejs/nodejs-debugging#_javascript-debug-terminal) and then run the project to see whats happening on the backend.
+1. Create a [javascript debug terminal](https://code.visualstudio.com/docs/nodejs/nodejs-debugging#_javascript-debug-terminal)
+2. Run project using `npm run dev`
 
 ## Documentation
 

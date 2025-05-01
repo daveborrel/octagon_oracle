@@ -18,8 +18,21 @@ export const authenticateToken = (
   res: Response,
   next: NextFunction
 ) => {
-  // Do Stuff
+  // Check if token is legitimate
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
 
-  // Call Next
-  next();
+  if (!token) {
+    return res
+      .status(401)
+      .json({ message: "Access token is missing or invalid." });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.MY_SECRET);
+    req.user = decoded;
+    next();
+  } catch (error) {
+    return res.status(403).json({ message: "Invalid or expired token." });
+  }
 };
