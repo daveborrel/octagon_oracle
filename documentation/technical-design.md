@@ -76,6 +76,13 @@ Auth.js - checks for the presence of a token.
 I chose to use memCache as the primary caching method because it is the more simple approach to learn at the moment.
 [Caching with memCache and MongoDB](https://loadforge.com/guides/effective-caching-techniques-to-boost-mongodb-performance)
 
+This has performance advantages because the fighters will be read much more than they are written.
+
+1. Install memcached with `brew install memcached`
+2. Check if its running `echo "version" | nc 127.0.0.1 11211`
+3. in a new terminal `nc 127.0.0.1 11211` you can view your cache
+4. Commands like `stats items` or get `fighter:662f96f2d99a3b9a1a2b0cce`
+
 ## Sources
 
 - [Writing Middleware](https://expressjs.com/en/guide/writing-middleware.html)

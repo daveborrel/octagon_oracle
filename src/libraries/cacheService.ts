@@ -31,9 +31,15 @@ class CacheService implements CacheServiceProps {
   async storeNewValueInCache(key, value, lifetime = this.defaultTTL) {
     return new Promise((resolve, reject) => {
       this.client.set(key, value, lifetime, (err) => {
-        if (err) return reject(err);
+        if (err) {
+          console.log("Failed to store in the cache");
+          return reject(err);
+        }
+        console.log(`Stored in cache: ${key}`);
         resolve(true);
       });
     });
   }
 }
+
+export default CacheService;

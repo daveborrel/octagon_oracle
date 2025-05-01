@@ -1,6 +1,7 @@
 // userRepository.ts
 import { collections } from "../../config/database/database";
 import Fighter from "./fighterModel";
+import cache from "../../libraries/cacheInstance";
 
 /**
  * This handles retrieving from the database.
@@ -10,7 +11,12 @@ export default class FighterRepository {
   async createFighter(firstName: string, lastName: string): Promise<any> {
     const newFighter = new Fighter(firstName, lastName);
     try {
-      await collections.fighters.insertOne(newFighter);
+      const result = await collections.fighters.insertOne(newFighter);
+      newFighter.id = result.insertedId;
+
+      const cacheKey = `fighter:${newFighter.id}`;
+      await cache.storeNewValueInCache(cacheKey, newFighter);
+
       return newFighter;
     } catch (error) {
       console.error("Unable to create fighter", error);
