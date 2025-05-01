@@ -2,6 +2,9 @@
 import { collections } from "../../config/database/database";
 import Fighter from "./fighterModel";
 
+var Memcached = require("memcached");
+var memcached = new Memcached("192.168.0.102:11211");
+
 /**
  * This handles retrieving from the database.
  */
