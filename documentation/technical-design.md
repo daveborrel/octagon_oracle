@@ -74,6 +74,7 @@ Auth.js - checks for the presence of a token.
 ## Caching
 
 I chose to use memCache as the primary caching method because it is the more simple approach to learn at the moment.
+[Caching with memCache and MongoDB](https://loadforge.com/guides/effective-caching-techniques-to-boost-mongodb-performance)
 
 ## Sources
 
